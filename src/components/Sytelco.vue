@@ -3,7 +3,7 @@
         <main>
             <sy-canvas></sy-canvas>
         </main>
-        <footer>
+        <footer class="sy-input">
             <sy-command></sy-command>
         </footer>
     </div>
@@ -44,5 +44,13 @@
 
     a {
         color: #42b983;
+    }
+
+    .sy-input {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
     }
 </style>
