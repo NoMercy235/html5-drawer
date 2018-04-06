@@ -20,7 +20,7 @@ export class Utils {
         if (![5, 6].includes(commandParts.length)) return Utils.errors.args;
 
         const coords = commandParts.slice(1, 5);
-        if (coords.some(coord => coord < 0)) return Utils.errors.invalidArgs;
+        if (coords.some(coord => isNaN(coord) || coord < 0)) return Utils.errors.invalidArgs;
         if (coords[0] > window.innerWidth || coords[1] > window.innerHeight) return Utils.errors.invalidArgs;
 
         return null;
@@ -29,7 +29,7 @@ export class Utils {
     static isInvalidLine(commandParts) {
         if (commandParts.length !== 5) return Utils.errors.args;
         const coords = commandParts.slice(1);
-        if (coords.some(coord => coord < 0 )) return Utils.errors.invalidArgs;
+        if (coords.some(coord =>  isNaN(coord) || coord < 0 )) return Utils.errors.invalidArgs;
         if ([coords[0], coords[2]].some(coord => coord > window.innerHeight)) return Utils.errors.invalidArgs;
         if ([coords[1], coords[3]].some(coord => coord > window.innerWidth)) return Utils.errors.invalidArgs;
         return null;

@@ -27,7 +27,8 @@
             },
             drawRect(ctx, args) {
                 ctx.fillStyle = args.color;
-                ctx.fillRect(...args.coords);
+                ctx.rect(...args.coords);
+                ctx.stroke();
             },
             drawLine(ctx, args) {
                 ctx.beginPath();
