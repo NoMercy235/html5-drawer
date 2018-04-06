@@ -24,7 +24,9 @@
         name: 'Command',
         data() {
             return {
-                data: [{ command: 'rectangle' }, { command: 'circle' }, { command: 'line' }, { command: 'fill' }, { command: 'clear' },  ],
+                data: Object.keys(Utils.commands)
+                    .map(key => { return { command: Utils.commands[key].query, helper: Utils.commands[key].helper } })
+                    .filter(c =>  c && c.command ),
                 error: null
             };
         },

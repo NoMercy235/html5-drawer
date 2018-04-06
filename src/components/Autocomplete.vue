@@ -5,7 +5,8 @@
         <transition-group v-show="canShowFiltered" name="fade" tag="ul" class="sy-results">
             <li v-for="item in filtered" :key="item.command" @click="selectCommand(item.command)">
                 <span>
-                    <strong>{{ item.command  }}</strong>
+                    <strong>{{ item.command }}</strong>
+                    <small>{{ item.helper }}</small>
                 </span>
             </li>
         </transition-group>

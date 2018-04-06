@@ -29,6 +29,12 @@
                 ctx.fillStyle = args.color;
                 ctx.fillRect(...args.coords);
             },
+            drawLine(ctx, args) {
+                ctx.beginPath();
+                ctx.moveTo(args.coords[0], args.coords[1]);
+                ctx.lineTo(args.coords[2], args.coords[3]);
+                ctx.stroke();
+            },
         },
     };
 </script>
