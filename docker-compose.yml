@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-    ask-around:
+    html5-drawer:
         container_name: html5-drawer
         build:
             context: .
