@@ -12,11 +12,14 @@
         },
         mounted() {
             this.getCanvasRef();
+            window.addEventListener('resize', this.setCanvasSize)
         },
         methods: {
             getCanvasRef() {
                 this.canvasRef = this.$refs['sy-canvas'];
-
+                this.setCanvasSize();
+            },
+            setCanvasSize() {
                 this.$refs['sy-canvas'].width = this.$refs['sy-canvas'].parentElement.clientWidth - 4;
                 this.$refs['sy-canvas'].height = this.$refs['sy-canvas'].parentElement.clientHeight - 4;
             },

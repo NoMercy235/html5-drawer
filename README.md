@@ -28,7 +28,7 @@ The user should know the following:
 - Errors are shown beneath the autocomplete field, not as a popup or toaster.
 - Autocomplete should work only for parts of the commands that are static. In other words, it shouldn't autocomplete arguments (but a usage helper is shown)
 - The canvas occupies the entire screen (even the space behind the autocomplete element)
-- The canvas elements should not be resized after they have been drawn if the window's size changes. Same goes for the canvas' size.
+- The canvas will be cleared when the screen is resized. 
 
 ## Build Setup
 
