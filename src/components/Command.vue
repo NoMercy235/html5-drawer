@@ -9,17 +9,23 @@
             @sendCommand="commandReceived"
         >
         </sy-autocomplete>
+        <p v-if="error" class="sy-error">
+            {{ error.message }}
+            {{ error.helper }}
+        </p>
     </div>
 </template>
 
 <script>
-    import Autocomplete from './Autocomplete'
+    import Autocomplete from './Autocomplete';
+    import { Utils} from "./utils";
 
     export default {
         name: 'Command',
         data() {
             return {
                 data: [{ command: 'rectangle' }, { command: 'circle' }, { command: 'line' }, { command: 'fill' }, { command: 'clear' },  ],
+                error: null
             };
         },
         computed: {
@@ -30,7 +36,14 @@
         },
         methods: {
             commandReceived(command) {
-                this.$emit('sendCommand', command);
+                const parsedCommand = Utils.parseCommand(command);
+                if (parsedCommand.method === 'invalid') {
+                    this.error = { message: parsedCommand.message, helper: parsedCommand.helper };
+                    console.log(this.error);
+                } else {
+                    this.error = null;
+                    this.$emit('sendCommand', parsedCommand);
+                }
             }
         }
     };
@@ -38,4 +51,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .sy-error {
+        color: red;
+        font-weight: 700;
+    }
 </style>

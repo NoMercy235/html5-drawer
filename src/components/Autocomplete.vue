@@ -9,7 +9,7 @@
                 </span>
             </li>
         </transition-group>
-        <p v-show="isEmpty">Sorry, but there is no such command :( </p>
+        <!--<p v-show="isEmpty">Sorry, but there is no such command :( </p>-->
     </div>
 </template>
 
