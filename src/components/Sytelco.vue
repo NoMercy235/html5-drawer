@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <main>
+    <div class="sy-full-height">
+        <main class="sy-full-height">
             <sy-canvas></sy-canvas>
         </main>
         <footer class="sy-input">
