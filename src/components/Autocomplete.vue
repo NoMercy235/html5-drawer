@@ -44,6 +44,8 @@
             },
             sendQuery(event) {
                 this.$emit('sendCommand', this.query);
+                this.query = '';
+                this.canShowFiltered = false;
             },
             selectCommand(command) {
                 this.query = command;

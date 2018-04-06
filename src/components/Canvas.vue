@@ -16,7 +16,6 @@
         methods: {
             getCanvasRef() {
                 this.canvasRef = this.$refs['sy-canvas'];
-                console.log(this.canvasRef);
 
                 this.$refs['sy-canvas'].width = this.$refs['sy-canvas'].parentElement.clientWidth - 4;
                 this.$refs['sy-canvas'].height = this.$refs['sy-canvas'].parentElement.clientHeight - 4;
@@ -42,6 +41,10 @@
                 ctx.arc(args.coords[0], args.coords[1], args.radius, 0, 2 * Math.PI);
                 ctx.stroke();
             },
+            clearCanvas(ctx, args) {
+                ctx.fillStyle = args.color;
+                ctx.fillRect(0, 0, this.canvasRef.width, this.canvasRef.height);
+            }
         },
     };
 </script>

@@ -12,12 +12,16 @@ export class Utils {
                 if (invalid) return Utils.invalidCommand(invalid, Utils.commands.line.helper);
                 return { method: Utils.commands.line.method, args: { coords: commandParts.slice(1) } };
             case Utils.commands.circle.name:
-                invalid = Utils.isInvalidLine(commandParts);
+                invalid = Utils.isInvalidCircle(commandParts);
                 if (invalid) return Utils.invalidCommand(invalid, Utils.commands.circle.helper);
                 return {
                     method: Utils.commands.circle.method,
                     args: { coords: commandParts.slice(1, 3), radius: commandParts[3], color: commandParts[4] },
                 };
+            case Utils.commands.clear.name:
+                invalid = Utils.isInvalidClear(commandParts);
+                if (invalid) return Utils.invalidCommand(invalid, Utils.commands.circle.helper);
+                return { method: Utils.commands.clear.method, args: { color: commandParts[1] } };
             default:
                 return Utils.invalidCommand(Utils.errors.notRecognized);
         }
@@ -42,12 +46,17 @@ export class Utils {
         return null;
     }
 
-    static isInvalidLine(commandParts) {
+    static isInvalidCircle(commandParts) {
         if (![4, 5].includes(commandParts.length)) return Utils.errors.args;
 
         const coords = commandParts.slice(1, 3);
         if (coords.some(coord => isNaN(coord) || coord < 0 )) return Utils.errors.invalidArgs;
         if (isNaN(commandParts[3])) return Utils.errors.invalidArgs;
+        return null;
+    }
+
+    static isInvalidClear(commandParts) {
+        if (![1, 2].includes(commandParts.length)) return Utils.errors.args;
         return null;
     }
 
@@ -79,6 +88,12 @@ export class Utils {
             method: 'drawCircle',
             query: 'circle',
             helper: 'Usage: circle x y radius [color=black]',
+        },
+        clear: {
+            name: 'clear',
+            method: 'clearCanvas',
+            query: 'clear',
+            helper: 'Usage: clear [color=black]',
         },
         invalid: {
             name: 'invalid',
