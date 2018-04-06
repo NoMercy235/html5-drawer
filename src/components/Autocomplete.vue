@@ -1,7 +1,7 @@
 <template>
-    <div @keyup.enter.stop="sendQuery" @keyup.enter.tab="selectFirstCommand">
+    <div @keydown.enter.prevent.stop="sendQuery" @keydown.tab.prevent.stop="selectFirstCommand">
         <input type="text" class="sy-search-input" v-model="query" :placeholder="placeholder"
-               @keyup="canShowFiltered = true"/>
+               @keydown="canShowFiltered = true"/>
         <transition-group v-show="canShowFiltered" name="fade" tag="ul" class="sy-results">
             <li v-for="item in filtered" :key="item.command" @click="selectCommand(item.command)">
                 <span>
@@ -49,7 +49,9 @@
                 this.canShowFiltered = false;
             },
             selectFirstCommand() {
-                this.query = this.filtered[0].command;
+                if (this.query.length) {
+                    this.query = this.filtered[0].command;
+                }
                 this.canShowFiltered = false;
             }
         },
