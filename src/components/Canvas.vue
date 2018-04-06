@@ -3,6 +3,8 @@
 </template>
 
 <script>
+    import { Utils} from "./utils";
+
     export default {
         name: 'Canvas',
         data() {
@@ -21,14 +23,17 @@
                 this.$refs['sy-canvas'].width = this.$refs['sy-canvas'].parentElement.clientWidth - 4;
                 this.$refs['sy-canvas'].height = this.$refs['sy-canvas'].parentElement.clientHeight - 4;
             },
-            drawShape() {
-                const context = this.canvasRef.getContext('2d');
-                console.log(context);
-                context.beginPath();
-                context.moveTo(75, 50);
-                context.moveTo(75, 100);
-                context.moveTo(25, 100);
-                context.fill();
+            drawShape(command) {
+                const ctx = this.canvasRef.getContext('2d');
+                const parsedCommand = Utils.parseCommand(command);
+                this[parsedCommand.method](ctx, parsedCommand.args);
+            },
+            drawRect(ctx, args) {
+                ctx.fillStyle = args.color;
+                ctx.fillRect(...args.coords);
+            },
+            invalid() {
+                // TODO: show some errors
             }
         },
     };

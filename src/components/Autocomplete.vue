@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <input type="text" class="sy-search-input" v-model="query" :placeholder="placeholder"/>
-        <transition-group name="fade" tag="ul" class="sy-results">
-            <li v-for="item in filtered" :key="item.command">
+    <div @keyup.enter.stop="sendQuery" @keyup.enter.tab="selectFirstCommand">
+        <input type="text" class="sy-search-input" v-model="query" :placeholder="placeholder"
+               @keyup="canShowFiltered = true"/>
+        <transition-group v-show="canShowFiltered" name="fade" tag="ul" class="sy-results">
+            <li v-for="item in filtered" :key="item.command" @click="selectCommand(item.command)">
                 <span>
                     <strong>{{ item.command  }}</strong>
                 </span>
@@ -40,11 +41,23 @@
             reset() {
                 this.query = '';
             },
+            sendQuery(event) {
+                this.$emit('sendCommand', this.query);
+            },
+            selectCommand(command) {
+                this.query = command;
+                this.canShowFiltered = false;
+            },
+            selectFirstCommand() {
+                this.query = this.filtered[0].command;
+                this.canShowFiltered = false;
+            }
         },
         data() {
             return {
                 items: [],
                 query: '',
+                canShowFiltered: false,
             };
         },
         mounted() {
@@ -66,7 +79,7 @@
             },
             isEmpty() {
                 return this.filtered && this.filtered.length < 1;
-            },
+            }
         },
     }
 </script>

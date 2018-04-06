@@ -6,6 +6,7 @@
             filter-key="command"
             :start-at="2"
             v-bind:style="{ width: windowWidth }"
+            @sendCommand="commandReceived"
         >
         </sy-autocomplete>
     </div>
@@ -18,14 +19,19 @@
         name: 'Command',
         data() {
             return {
-                data: [{ command: 'test' }, { command: 'alice' }, { command: 'Alex' }, ],
+                data: [{ command: 'rectangle' }, { command: 'circle' }, { command: 'line' }, { command: 'fill' }, { command: 'clear' },  ],
             };
         },
         computed: {
-            windowWidth: () => (window.innerWidth - 4) + 'px',
+            windowWidth: () => (window.innerWidth - 40) + 'px',
         },
         components: {
             'sy-autocomplete': Autocomplete,
+        },
+        methods: {
+            commandReceived(command) {
+                this.$emit('sendCommand', command);
+            }
         }
     };
 </script>

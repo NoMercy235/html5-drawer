@@ -1,10 +1,10 @@
 <template>
     <div class="sy-full-height">
         <main class="sy-full-height">
-            <sy-canvas></sy-canvas>
+            <sy-canvas ref="sy-canvas"></sy-canvas>
         </main>
         <footer class="sy-input">
-            <sy-command></sy-command>
+            <sy-command @sendCommand="commandReceived"></sy-command>
         </footer>
     </div>
 </template>
@@ -23,6 +23,11 @@
             'sy-canvas': Canvas,
             'sy-command': Command,
         },
+        methods: {
+            commandReceived(command) {
+                this.$refs['sy-canvas'].drawShape(command);
+            }
+        }
     };
 </script>
 
