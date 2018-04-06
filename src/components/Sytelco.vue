@@ -1,14 +1,27 @@
 <template>
     <div>
+        <main>
+            <sy-canvas></sy-canvas>
+        </main>
+        <footer>
+            <sy-command></sy-command>
+        </footer>
     </div>
 </template>
 
 <script>
+    import Canvas from './Canvas';
+    import Command from './Command';
+
     export default {
         name: 'Sytelco',
         data() {
             return {
             };
+        },
+        components: {
+            'sy-canvas': Canvas,
+            'sy-command': Command,
         },
     };
 </script>
