@@ -19,6 +19,16 @@ The main commands that the user can enter are:
 
 The `fill` command was not implemented due to time constraints. 
 
+## Assumptions
+
+The user should know the following:
+- Pressing the `Enter` key will send whatever string is currently in the input field
+- Pressing the `Tab` key will autocomplete *only* the main part of the command. If it's already completed, it won't do anything
+- Pressing with the left mouse button on any of the suggested commands will act as if the user pressed the `Tab` key
+- Errors are shown beneath the autocomplete field, not as a popup or toaster.
+- Autocomplete should work only for parts of the commands that are static. In other words, it shouldn't autocomplete arguments (but a usage helper is shown)
+- The canvas occupies the entire screen (even the space behind the autocomplete element)
+- The canvas elements should not be resized after they have been drawn if the window's size changes. Same goes for the canvas' size.
 
 ## Build Setup
 

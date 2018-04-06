@@ -52,7 +52,7 @@
                 this.canShowFiltered = false;
             },
             selectFirstCommand() {
-                if (this.query.length) {
+                if (this.query.length && this.filtered[0].command.length > this.query.length) {
                     this.query = this.filtered[0].command;
                 }
             }
