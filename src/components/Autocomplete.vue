@@ -53,7 +53,6 @@
                 if (this.query.length) {
                     this.query = this.filtered[0].command;
                 }
-                this.canShowFiltered = false;
             }
         },
         data() {
@@ -73,7 +72,7 @@
                         if(item[this.filterKey]) {
                             return item[this.filterKey]
                                 .toLowerCase()
-                                .includes(this.query.toLowerCase());
+                                .includes(this.query.split(' ')[0].toLowerCase());
                         } else {
                             console.error(`Key '${this.filterKey}' doesn't exist on object!`, item);
                         }

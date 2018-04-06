@@ -11,6 +11,13 @@ export class Utils {
                 invalid = Utils.isInvalidLine(commandParts);
                 if (invalid) return Utils.invalidCommand(invalid, Utils.commands.line.helper);
                 return { method: Utils.commands.line.method, args: { coords: commandParts.slice(1) } };
+            case Utils.commands.circle.name:
+                invalid = Utils.isInvalidLine(commandParts);
+                if (invalid) return Utils.invalidCommand(invalid, Utils.commands.circle.helper);
+                return {
+                    method: Utils.commands.circle.method,
+                    args: { coords: commandParts.slice(1, 3), radius: commandParts[3], color: commandParts[4] },
+                };
             default:
                 return Utils.invalidCommand(Utils.errors.notRecognized);
         }
@@ -32,6 +39,15 @@ export class Utils {
         if (coords.some(coord =>  isNaN(coord) || coord < 0 )) return Utils.errors.invalidArgs;
         if ([coords[0], coords[2]].some(coord => coord > window.innerHeight)) return Utils.errors.invalidArgs;
         if ([coords[1], coords[3]].some(coord => coord > window.innerWidth)) return Utils.errors.invalidArgs;
+        return null;
+    }
+
+    static isInvalidLine(commandParts) {
+        if (![4, 5].includes(commandParts.length)) return Utils.errors.args;
+
+        const coords = commandParts.slice(1, 3);
+        if (coords.some(coord => isNaN(coord) || coord < 0 )) return Utils.errors.invalidArgs;
+        if (isNaN(commandParts[3])) return Utils.errors.invalidArgs;
         return null;
     }
 
@@ -57,6 +73,12 @@ export class Utils {
             method: 'drawLine',
             query: 'line',
             helper: 'Usage: line x1 y1 x2 y2',
+        },
+        circle: {
+            name: 'circle',
+            method: 'drawCircle',
+            query: 'circle',
+            helper: 'Usage: circle x y radius [color=black]',
         },
         invalid: {
             name: 'invalid',

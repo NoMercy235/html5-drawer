@@ -26,7 +26,7 @@
                 this[command.method](ctx, command.args);
             },
             drawRect(ctx, args) {
-                ctx.fillStyle = args.color;
+                ctx.strokeStyle = args.color;
                 ctx.rect(...args.coords);
                 ctx.stroke();
             },
@@ -34,6 +34,12 @@
                 ctx.beginPath();
                 ctx.moveTo(args.coords[0], args.coords[1]);
                 ctx.lineTo(args.coords[2], args.coords[3]);
+                ctx.stroke();
+            },
+            drawCircle(ctx, args) {
+                ctx.strokeStyle = args.color;
+                ctx.beginPath();
+                ctx.arc(args.coords[0], args.coords[1], args.radius, 0, 2 * Math.PI);
                 ctx.stroke();
             },
         },
